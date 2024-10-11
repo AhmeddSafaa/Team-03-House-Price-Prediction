@@ -1,0 +1,16 @@
+missing_values = df.isnull().sum().sort_values(ascending=False)
+missing_percentage = (df.isnull().sum() / len(df)) * 100
+# View columns with missing data
+missing_df = pd.DataFrame({'Missing Values': missing_values, 'Percentage': missing_percentage})
+missing = missing_df[missing_df['Percentage'] > 0]
+missing = missing.sort_values(by='Percentage', ascending=False)
+missing = missing.rename_axis('Feature')
+missing
+
+
+# -----------------------------------------
+
+
+sns.barplot(y=missing['Percentage'].index,x=missing['Percentage'], color='green')
+
+plt.xticks()
